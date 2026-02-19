@@ -19,7 +19,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* Form Section */
+
 .eventform {
     flex: 1;
     min-width: 280px;
@@ -69,7 +69,6 @@ body {
     background-color: #c25222;
 }
 
-/* Event Section */
 .event {
     flex: 2;
     min-width: 320px;
@@ -94,14 +93,14 @@ body {
     background-color: #574fd6;
 }
 
-/* Cards Container */
+
 .cards {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
 }
 
-/* Individual Card */
+
 .card {
     background-color: #f3f4ff;
     width: 200px;
@@ -120,7 +119,7 @@ body {
     margin-bottom: 5px;
 }
 
-/* Delete Button */
+
 .deletecard {
     position: absolute;
     top: 8px;

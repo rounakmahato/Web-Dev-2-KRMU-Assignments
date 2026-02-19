@@ -61,7 +61,6 @@ const addSampleBtn = document.querySelector("#addSample")
 
 eventcards.innerHTML = "<p class='empty'>No events yet. Add your first event!</p>"
 
-
 form.addEventListener("submit", function(event){
     event.preventDefault()
 
@@ -84,7 +83,6 @@ form.addEventListener("submit", function(event){
         <p><strong>Category:</strong> ${cat}</p>
         <p>${desc}</p>
     `
-
     eventcards.appendChild(card)
 
     form.reset()
@@ -103,7 +101,6 @@ eventcards.addEventListener("click", function(e){
 clearAllBtn.addEventListener("click", function(){
     eventcards.innerHTML = "<p class='empty'>No events yet. Add your first event!</p>"
 })
-
 
 addSampleBtn.addEventListener("click", function(){
 
