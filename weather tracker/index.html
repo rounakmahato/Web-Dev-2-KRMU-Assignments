@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Async Weather Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>🌤 Async Weather Tracker</h1>
+
+<div class="container">
+
+<div class="card">
+
+<h3>Search City</h3>
+
+<input type="text" id="cityInput" placeholder="Enter city">
+<button id="searchBtn">Search</button>
+
+<h4>Search History</h4>
+
+<div id="history"></div>
+
+</div>
+
+
+<div class="card">
+
+<h3>Weather Info</h3>
+
+<div id="weatherResult">No data</div>
+
+</div>
+
+</div>
+
+
+<div class="console">
+
+<h3>Console – Event Loop</h3>
+
+<pre id="log"></pre>
+
+</div>
+
+
+<script>
+
+const cityInput = document.getElementById("cityInput")
+const searchBtn = document.getElementById("searchBtn")
+const weatherResult = document.getElementById("weatherResult")
+const historyDiv = document.getElementById("history")
+const logBox = document.getElementById("log")
+
+function addLog(msg){
+console.log(msg)
+logBox.textContent += msg + "\n"
+}
+
+searchBtn.addEventListener("click",()=>{
+
+const city = cityInput.value.trim()
+
+if(city===""){
+alert("Enter city name")
+return
+}
+
+fetchWeather(city)
+
+})
+
+async function fetchWeather(city){
+
+addLog("[SYNC] Start function")
+
+try{
+
+addLog("[ASYNC] Getting coordinates")
+
+const geoResponse = await fetch(
+`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`
+)
+
+const geoData = await geoResponse.json()
+
+if(!geoData.results){
+throw new Error("City not found")
+}
+
+const lat = geoData.results[0].latitude
+const lon = geoData.results[0].longitude
+
+addLog("[ASYNC] Coordinates received")
+
+const weatherResponse = await fetch(
+`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+)
+
+const weatherData = await weatherResponse.json()
+
+addLog("[ASYNC] Weather data received")
+
+displayWeather(city,weatherData.current_weather)
+
+saveHistory(city)
+
+}catch(error){
+
+weatherResult.innerHTML="<p style='color:red'>City not found</p>"
+
+addLog("[ERROR] "+error.message)
+
+}
+
+addLog("[SYNC] End function")
+
+}
+
+function displayWeather(city,data){
+
+weatherResult.innerHTML=`
+
+<p><b>City:</b> ${city}</p>
+<p><b>Temperature:</b> ${data.temperature} °C</p>
+<p><b>Wind Speed:</b> ${data.windspeed} km/h</p>
+<p><b>Weather Code:</b> ${data.weathercode}</p>
+
+`
+
+}
+
+function saveHistory(city){
+
+let history = JSON.parse(localStorage.getItem("cities")) || []
+
+if(!history.includes(city)){
+history.push(city)
+localStorage.setItem("cities",JSON.stringify(history))
+}
+
+showHistory()
+
+}
+
+function showHistory(){
+
+historyDiv.innerHTML=""
+
+let history = JSON.parse(localStorage.getItem("cities")) || []
+
+history.forEach(city=>{
+
+const tag = document.createElement("span")
+
+tag.textContent = city
+
+tag.onclick=()=>fetchWeather(city)
+
+historyDiv.appendChild(tag)
+
+})
+
+}
+
+showHistory()
+
+</script>
+
+</body>
+</html>

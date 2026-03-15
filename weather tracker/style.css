@@ -1,0 +1,104 @@
+body{
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+background:#1e293b;
+color:white;
+margin:0;
+padding:40px 20px;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+h1{
+margin-bottom:30px;
+font-weight:600;
+}
+
+.container{
+display:grid;
+grid-template-columns: 1fr;
+gap:20px;
+width:420px;
+}
+
+.card{
+background:#f8fafc;
+color:#222;
+padding:25px;
+border-radius:12px;
+box-shadow:0 8px 18px rgba(0,0,0,0.25);
+}
+
+.card h3{
+margin-top:0;
+margin-bottom:15px;
+color:#334155;
+}
+
+input{
+width:65%;
+padding:10px;
+border-radius:6px;
+border:1px solid #cbd5e1;
+font-size:14px;
+}
+
+button{
+padding:10px 14px;
+border:none;
+background:#16a34a;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-size:14px;
+margin-left:5px;
+transition:0.2s;
+}
+
+button:hover{
+background:#15803d;
+}
+
+#history{
+margin-top:10px;
+}
+
+#history span{
+display:inline-block;
+background:#e2e8f0;
+color:#111;
+padding:6px 10px;
+margin:4px;
+border-radius:6px;
+font-size:13px;
+cursor:pointer;
+}
+
+#history span:hover{
+background:#cbd5f5;
+}
+
+#weatherResult{
+margin-top:10px;
+line-height:1.6;
+}
+
+.console{
+margin-top:30px;
+background:#020617;
+width:420px;
+padding:18px;
+border-radius:10px;
+border:1px solid #334155;
+}
+
+.console h3{
+margin-top:0;
+font-size:16px;
+}
+
+pre{
+font-size:12px;
+color:#a5f3fc;
+white-space:pre-wrap;
+}
